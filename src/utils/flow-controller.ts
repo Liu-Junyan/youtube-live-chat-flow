@@ -182,7 +182,10 @@ export default class FlowController {
     })
   }
 
-  private getLinesAndHeight(videoHeight: number, settings: Settings) {
+  private getLinesAndHeight(
+    videoHeight: number,
+    settings: Settings
+  ): [number, number] {
     let lines, height
     if (settings.heightType === 'fixed') {
       height = settings.lineHeight
@@ -195,7 +198,7 @@ export default class FlowController {
     return [lines, height]
   }
 
-  private async validateDeletedMessage(element: HTMLElement) {
+  private async validateDeletedMessage(element: HTMLElement): Promise<boolean> {
     const active = document.documentElement.classList.contains(
       ClassName.filterActivated
     )
@@ -220,7 +223,7 @@ export default class FlowController {
     message: Message,
     height: number,
     settings: Settings
-  ) {
+  ): Promise<HTMLElement | null> {
     const ms = new MessageSettings(message, settings)
     if (!ms.template) {
       return null
@@ -252,7 +255,12 @@ export default class FlowController {
     element: HTMLElement,
     containerWidth: number,
     settings: Settings
-  ) {
+  ): {
+    willAppear: number
+    didAppear: number
+    willDisappear: number
+    didDisappear: number
+  } {
     const displayMillis = settings.displayTime * 1000
     const delayMillis = settings.delayTime * 1000
     const w = element.offsetWidth
@@ -272,7 +280,7 @@ export default class FlowController {
     element: HTMLElement,
     containerWidth: number,
     settings: Settings
-  ) {
+  ): Animation {
     element.style.transform = `translate(${containerWidth}px, 0px)`
 
     const duration = settings.displayTime * 1000
@@ -286,12 +294,16 @@ export default class FlowController {
     return animation
   }
 
-  private isDeniedIndex(index: number, lines: number) {
+  private isDeniedIndex(index: number, lines: number): boolean {
     // e.g. if lines value is "12", denied index is "23", "47", "71" ...
     return index % (lines * 2) === lines * 2 - 1
   }
 
-  private getIndex(lines: number, messageRows: number, timeline: Timeline) {
+  private getIndex(
+    lines: number,
+    messageRows: number,
+    timeline: Timeline
+  ): number {
     let index = this.timelines.findIndex((_, i, timelines) => {
       const mod = (i + messageRows) % lines
       if (mod > 0 && mod < messageRows) {
@@ -333,7 +345,11 @@ export default class FlowController {
     return index
   }
 
-  private pushTimeline(timeline: Timeline, index: number, messageRows: number) {
+  private pushTimeline(
+    timeline: Timeline,
+    index: number,
+    messageRows: number
+  ): void {
     Array(messageRows)
       .fill(1)
       .forEach((_, j) => {

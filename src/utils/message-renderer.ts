@@ -2,12 +2,12 @@ import Color from 'color'
 import { EmojiStyle } from '~/models'
 
 // e.g. https://yt3.ggpht.com/-TusVtXdhftI/AAAAAAAAAAI/AAAAAAAAAAA/OCgsPx8gmAk/s32-c-k-no-mo-rj-c0xffffff/photo.jpg
-const resizeAvatarUrl = (url: string, size: number) => {
+const resizeAvatarUrl = (url: string, size: number): string => {
   return url.replace(/(\/s)\d+([^/]+\/photo\.jpg)$/, `$1${Math.ceil(size)}$2`)
 }
 
 // e.g. https://yt3.ggpht.com/8ucCFoLkjQ9pVsfaKuFnHqIQqFjSr7Bht0dVuptyntxe-t6uej1BfH_vTk-cn1nsZdXjkjqipg=w24-h24-c-k-nd
-const resizeEmojiUrl = (url: string, size: number) => {
+const resizeEmojiUrl = (url: string, size: number): string => {
   return url.replace(
     /(=w)\d+(-h)\d+([^=]+)$/,
     `$1${Math.ceil(size)}$2${Math.ceil(size)}$3`
@@ -15,7 +15,7 @@ const resizeEmojiUrl = (url: string, size: number) => {
 }
 
 // e.g. https://lh3.googleusercontent.com/kgcJnLI6rRPD1Jm7xko7FNnl0k9qVFGzNvu8TmtTcAs4vHwigbTfa0N7N98r1TfqUPfHfRRln47UiRbeCr3Z=s40-rp
-const resizeStickerUrl = (url: string, size: number) => {
+const resizeStickerUrl = (url: string, size: number): string => {
   return url.replace(/(=s)\d+([^=]+)$/, `$1${Math.ceil(size)}$2`)
 }
 
@@ -23,7 +23,7 @@ const getOutlineStyle = (
   fontColor: string,
   height: number,
   outlineRatio: number
-) => {
+): string => {
   if (!outlineRatio) {
     return ''
   }
@@ -42,7 +42,7 @@ const getOutlineStyle = (
         `
 }
 
-const renderAvatar = (url: string, height: number) => {
+const renderAvatar = (url: string, height: number): HTMLImageElement => {
   const el = document.createElement('img')
   el.src = resizeAvatarUrl(url, height)
   el.style.height = `${height}px`
@@ -51,7 +51,7 @@ const renderAvatar = (url: string, height: number) => {
   return el
 }
 
-const renderAuthor = (author: string, height: number) => {
+const renderAuthor = (author: string, height: number): HTMLSpanElement => {
   const textHeight = height * 0.8
   const padding = height * 0.1
   const el = document.createElement('span')
@@ -71,7 +71,7 @@ const renderMessage = (
   html: string,
   height: number,
   emojiStyle: EmojiStyle
-) => {
+): HTMLSpanElement | null => {
   const el = document.createElement('span')
   el.style.minWidth = '0'
   el.style.overflow = 'hidden'
@@ -110,7 +110,7 @@ const renderMessage = (
   return el
 }
 
-const renderStickerImage = (url: string, height: number) => {
+const renderStickerImage = (url: string, height: number): HTMLImageElement => {
   const el = document.createElement('img')
   el.src = resizeStickerUrl(url, height)
   el.style.height = `${height}px`
@@ -139,7 +139,7 @@ const renderOneLineMessage = ({
   height: number
   width: number
   emojiStyle: EmojiStyle
-}) => {
+}): HTMLDivElement | null => {
   const el = document.createElement('div')
   el.style.color = fontColor ?? 'white'
   el.style.fontSize = `${height * 0.8 * 0.9}px`
@@ -203,7 +203,7 @@ const renderTwoLineMessage = ({
   height: number
   width: number
   emojiStyle: EmojiStyle
-}) => {
+}): HTMLDivElement | null => {
   const el = document.createElement('div')
   el.style.color = fontColor ?? 'white'
   el.style.fontSize = `${height * 0.8 * 0.9}px`
@@ -268,7 +268,7 @@ const renderSticker = ({
   fontStyle?: string
   backgroundColor?: string
   height: number
-}) => {
+}): HTMLDivElement => {
   const el = document.createElement('div')
   el.style.color = fontColor ?? 'white'
   el.style.fontSize = `${height * 0.8 * 0.9}px`

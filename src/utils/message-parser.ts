@@ -1,11 +1,18 @@
 import { Message } from '~/models'
 import { getImageSourceAsync } from '~/utils/dom-helper'
 
-const getBackgroundColor = (el: HTMLElement) => {
+const getBackgroundColor = (el: HTMLElement): string => {
   return getComputedStyle(el).backgroundColor
 }
 
-const parseCommonElements = async (el: HTMLElement) => {
+const parseCommonElements = async (
+  el: HTMLElement
+): Promise<{
+  message: string | undefined
+  author: string | undefined
+  authorType: string | undefined
+  avatarUrl: string | undefined
+}> => {
   const author = el.querySelector('#author-name')?.textContent ?? undefined
   const authorType = el.getAttribute('author-type') ?? undefined
   const avatorImage = el.querySelector('#img') as HTMLImageElement | null
@@ -16,7 +23,16 @@ const parseCommonElements = async (el: HTMLElement) => {
   return { message, author, authorType, avatarUrl }
 }
 
-const parseTextMessage = async (el: HTMLElement) => {
+const parseTextMessage = async (
+  el: HTMLElement
+): Promise<{
+  html: string | undefined
+  messageType: string
+  message: string | undefined
+  author: string | undefined
+  authorType: string | undefined
+  avatarUrl: string | undefined
+}> => {
   const params = await parseCommonElements(el)
 
   const html = el.querySelector('#message')?.innerHTML
@@ -28,7 +44,18 @@ const parseTextMessage = async (el: HTMLElement) => {
   }
 }
 
-const parsePaidMessage = async (el: HTMLElement) => {
+const parsePaidMessage = async (
+  el: HTMLElement
+): Promise<{
+  html: string | undefined
+  backgroundColor: string | undefined
+  subText: string | undefined
+  messageType: string
+  message: string | undefined
+  author: string | undefined
+  authorType: string | undefined
+  avatarUrl: string | undefined
+}> => {
   const params = await parseCommonElements(el)
 
   const html = el.querySelector('#message')?.innerHTML
@@ -45,7 +72,18 @@ const parsePaidMessage = async (el: HTMLElement) => {
   }
 }
 
-const parsePaidSticker = async (el: HTMLElement) => {
+const parsePaidSticker = async (
+  el: HTMLElement
+): Promise<{
+  stickerUrl: string | undefined
+  backgroundColor: string | undefined
+  subText: string
+  messageType: string
+  message: string | undefined
+  author: string | undefined
+  authorType: string | undefined
+  avatarUrl: string | undefined
+}> => {
   const params = await parseCommonElements(el)
 
   const subText = el.querySelector('#purchase-amount-chip')?.textContent ?? ''
@@ -66,7 +104,17 @@ const parsePaidSticker = async (el: HTMLElement) => {
   }
 }
 
-const parseMembershipItem = async (el: HTMLElement) => {
+const parseMembershipItem = async (
+  el: HTMLElement
+): Promise<{
+  html: string | undefined
+  backgroundColor: string | undefined
+  messageType: string
+  message: string | undefined
+  author: string | undefined
+  authorType: string | undefined
+  avatarUrl: string | undefined
+}> => {
   const params = await parseCommonElements(el)
 
   const detailText =
