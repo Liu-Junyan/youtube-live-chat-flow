@@ -101,10 +101,6 @@ export default class MessageSettings {
     return this.paid ? '#ffffff' : this.style.color
   }
 
-  get fontStyle(): string {
-    return this.settings.extendedStyle
-  }
-
   get backgroundColor(): string | undefined {
     const backgroundColor = this.paid
       ? this.message.backgroundColor

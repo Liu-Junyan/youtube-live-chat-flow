@@ -159,17 +159,6 @@
       single-line
       class="mt-1 pt-0"
     />
-
-    <div class="caption">Extended Style</div>
-    <v-textarea
-      v-model="extendedStyle"
-      placeholder='font-family: "Yu Gothic", YuGothic, Meiryo;'
-      dense
-      single-line
-      rows="1"
-      auto-grow
-      class="mt-1 pt-0"
-    />
   </div>
 </template>
 
@@ -217,16 +206,6 @@ export default defineComponent({
       set: (value) => {
         settingsStore.setEmojiStyle({
           emojiStyle: value,
-        })
-      },
-    })
-    const extendedStyle = computed({
-      get: () => {
-        return settingsStore.extendedStyle
-      },
-      set: (value) => {
-        settingsStore.setExtendedStyle({
-          extendedStyle: value,
         })
       },
     })
@@ -286,7 +265,6 @@ export default defineComponent({
       backgroundOpacity,
       emojiStyle,
       emojiStyles,
-      extendedStyle,
       heightType,
       heightTypes,
       lineHeight,

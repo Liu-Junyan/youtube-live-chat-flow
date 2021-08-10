@@ -26,7 +26,6 @@ export type Settings = {
   delayTime: number
   displayTime: number
   emojiStyle: EmojiStyle
-  extendedStyle: string
   growBottomChatInputEnabled: boolean
   heightType: HeightType
   lineHeight: number

@@ -234,7 +234,6 @@ export default class FlowController {
       author: ms.author ? message.author : undefined,
       avatarUrl: ms.avatar ? message.avatarUrl : undefined,
       fontColor: ms.fontColor,
-      fontStyle: ms.fontStyle,
       backgroundColor: ms.backgroundColor,
       height,
       width: settings.maxWidth,

@@ -18,7 +18,6 @@ const initialState: Settings = {
   delayTime: 0,
   displayTime: 5,
   emojiStyle: 'image',
-  extendedStyle: '',
   growBottomChatInputEnabled: false,
   heightType: 'flexible',
   lineHeight: 64,
@@ -77,7 +76,7 @@ export default class SettingsModule extends VuexModule {
   delayTime = initialState.delayTime
   displayTime = initialState.displayTime
   emojiStyle = initialState.emojiStyle
-  extendedStyle = initialState.extendedStyle
+  // extendedStyle = initialState.extendedStyle
   growBottomChatInputEnabled = false
   heightType = initialState.heightType
   lineHeight = initialState.lineHeight
@@ -150,10 +149,10 @@ export default class SettingsModule extends VuexModule {
   setEmojiStyle({ emojiStyle }: { emojiStyle: EmojiStyle }): void {
     this.emojiStyle = emojiStyle
   }
-  @Mutation
-  setExtendedStyle({ extendedStyle }: { extendedStyle: string }): void {
-    this.extendedStyle = extendedStyle
-  }
+  // @Mutation
+  // setExtendedStyle({ extendedStyle }: { extendedStyle: string }): void {
+  //   this.extendedStyle = extendedStyle
+  // }
   @Mutation
   setGrowBottomChatInputEnabled({
     growBottomChatInputEnabled,

@@ -100,7 +100,6 @@ const renderOneLineMessage = ({
   subText,
   avatarUrl,
   fontColor,
-  fontStyle,
   backgroundColor,
   height,
   width,
@@ -111,7 +110,6 @@ const renderOneLineMessage = ({
   subText?: string
   avatarUrl?: string
   fontColor?: string
-  fontStyle?: string
   backgroundColor?: string
   height: number
   width: number
@@ -124,7 +122,6 @@ const renderOneLineMessage = ({
   el.style.padding = `${height * 0.1}px ${height * 0.2}px`
   el.style.backgroundColor = backgroundColor ?? 'transparent'
   el.style.maxWidth = width > 0 ? `${width}%` : 'unset'
-  el.setAttribute('style', el.getAttribute('style') + (fontStyle ?? ''))
 
   if (avatarUrl) {
     const avatar = renderAvatar(avatarUrl, height * 0.8)
@@ -163,7 +160,6 @@ const renderTwoLineMessage = ({
   subText,
   avatarUrl,
   fontColor,
-  fontStyle,
   backgroundColor,
   height,
   width,
@@ -174,7 +170,6 @@ const renderTwoLineMessage = ({
   subText?: string
   avatarUrl?: string
   fontColor?: string
-  fontStyle?: string
   backgroundColor?: string
   height: number
   width: number
@@ -188,7 +183,6 @@ const renderTwoLineMessage = ({
   el.style.alignItems = 'start'
   el.style.backgroundColor = backgroundColor ?? 'transparent'
   el.style.maxWidth = width > 0 ? `${width}%` : 'unset'
-  el.setAttribute('style', el.getAttribute('style') + (fontStyle ?? ''))
 
   if (avatarUrl) {
     const avatar = renderAvatar(avatarUrl, height * 0.8)
@@ -231,7 +225,6 @@ const renderSticker = ({
   subText,
   avatarUrl,
   fontColor,
-  fontStyle,
   backgroundColor,
   height,
 }: {
@@ -240,7 +233,6 @@ const renderSticker = ({
   subText?: string
   avatarUrl?: string
   fontColor?: string
-  fontStyle?: string
   backgroundColor?: string
   height: number
 }): HTMLDivElement => {
@@ -251,7 +243,6 @@ const renderSticker = ({
   el.style.padding = `${height * 0.1}px ${height * 0.2}px`
   el.style.alignItems = 'start'
   el.style.backgroundColor = backgroundColor ?? 'transparent'
-  el.setAttribute('style', el.getAttribute('style') + (fontStyle ?? ''))
 
   if (avatarUrl) {
     const avatar = renderAvatar(avatarUrl, height * 0.8)
@@ -287,7 +278,6 @@ type Params = {
   avatarUrl?: string
   stickerUrl?: string
   fontColor?: string
-  fontStyle?: string
   backgroundColor?: string
   height: number
   width: number
@@ -298,16 +288,12 @@ export const render = (
   template: Template,
   params: Params
 ): HTMLElement | null => {
-  const newParams = {
-    ...params,
-    fontStyle: params.fontStyle,
-  }
   switch (template) {
     case 'one-line-message':
-      return renderOneLineMessage(newParams)
+      return renderOneLineMessage(params)
     case 'two-line-message':
-      return renderTwoLineMessage(newParams)
+      return renderTwoLineMessage(params)
     case 'sticker':
-      return renderSticker(newParams)
+      return renderSticker(params)
   }
 }
