@@ -27,7 +27,7 @@ const initialState: Settings = {
   maxLines: 0,
   maxWidth: 200,
   opacity: 0.8,
-  overflow: 'overlay',
+  overflow: 'hidden',
   stackDirection: 'top_to_bottom',
   styles: {
     guest: {
