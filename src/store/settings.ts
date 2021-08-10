@@ -27,7 +27,6 @@ const initialState: Settings = {
   maxLines: 0,
   maxWidth: 200,
   opacity: 0.8,
-  outlineRatio: 0.015,
   overflow: 'overlay',
   stackDirection: 'top_to_bottom',
   styles: {
@@ -87,7 +86,6 @@ export default class SettingsModule extends VuexModule {
   maxLines = initialState.maxLines
   maxWidth = initialState.maxWidth
   opacity = initialState.opacity
-  outlineRatio = initialState.outlineRatio
   overflow = initialState.overflow
   stackDirection = initialState.stackDirection
   styles = initialState.styles
@@ -191,10 +189,6 @@ export default class SettingsModule extends VuexModule {
   @Mutation
   setOpacity({ opacity }: { opacity: number }): void {
     this.opacity = opacity
-  }
-  @Mutation
-  setOutlineRatio({ outlineRatio }: { outlineRatio: number }): void {
-    this.outlineRatio = outlineRatio
   }
   @Mutation
   setOverflow({ overflow }: { overflow: Overflow }): void {

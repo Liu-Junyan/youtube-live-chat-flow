@@ -1,0 +1,2 @@
+Disabled font outline
+Removed border radius

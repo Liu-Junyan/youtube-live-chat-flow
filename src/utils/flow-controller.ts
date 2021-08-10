@@ -238,7 +238,6 @@ export default class FlowController {
       backgroundColor: ms.backgroundColor,
       height,
       width: settings.maxWidth,
-      outlineRatio: settings.outlineRatio,
       emojiStyle: settings.emojiStyle,
     })
 

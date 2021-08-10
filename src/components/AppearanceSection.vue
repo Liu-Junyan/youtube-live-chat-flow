@@ -151,33 +151,6 @@
       </template>
     </v-slider>
 
-    <div class="caption">Outline Ratio</div>
-    <v-slider
-      v-model="outlineRatio"
-      class="align-center mb-5"
-      min="0"
-      max="5"
-      step="0.1"
-      dense
-      hide-details
-    >
-      <template #prepend>
-        <v-text-field
-          v-model="outlineRatio"
-          class="mt-0 pt-0"
-          dense
-          hide-details
-          single-line
-          type="number"
-          min="0"
-          max="5"
-          step="0.1"
-          suffix="%"
-          style="width: 75px"
-        />
-      </template>
-    </v-slider>
-
     <div class="caption">Emoji Style</div>
     <v-select
       v-model="emojiStyle"
@@ -307,16 +280,6 @@ export default defineComponent({
         })
       },
     })
-    const outlineRatio = computed({
-      get: () => {
-        return (settingsStore.outlineRatio * 1000) / 10
-      },
-      set: (value) => {
-        settingsStore.setOutlineRatio({
-          outlineRatio: (Number(value) * 10) / 1000,
-        })
-      },
-    })
 
     return {
       background,
@@ -330,7 +293,6 @@ export default defineComponent({
       lines,
       maxWidth,
       opacity,
-      outlineRatio,
     }
   },
 })

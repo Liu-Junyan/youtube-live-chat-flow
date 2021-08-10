@@ -19,29 +19,6 @@ const resizeStickerUrl = (url: string, size: number): string => {
   return url.replace(/(=s)\d+([^=]+)$/, `$1${Math.ceil(size)}$2`)
 }
 
-const getOutlineStyle = (
-  fontColor: string,
-  height: number,
-  outlineRatio: number
-): string => {
-  if (!outlineRatio) {
-    return ''
-  }
-  const n = (height * outlineRatio).toFixed(2)
-  const c = Color(fontColor).darken(0.6).hex()
-  return `
-          text-shadow:
-            -${n}px -${n}px 0 ${c},
-            ${n}px -${n}px 0 ${c},
-            -${n}px ${n}px 0 ${c},
-            ${n}px ${n}px 0 ${c},
-            0 ${n}px 0 ${c},
-            0 -${n}px 0 ${c},
-            ${n}px 0 0 ${c},
-            -${n}px 0 0 ${c};
-        `
-}
-
 const renderAvatar = (url: string, height: number): HTMLImageElement => {
   const el = document.createElement('img')
   el.src = resizeAvatarUrl(url, height)
@@ -146,7 +123,6 @@ const renderOneLineMessage = ({
   el.style.lineHeight = `${height * 0.8}px`
   el.style.padding = `${height * 0.1}px ${height * 0.2}px`
   el.style.backgroundColor = backgroundColor ?? 'transparent'
-  el.style.borderRadius = `${height * 0.1}px`
   el.style.maxWidth = width > 0 ? `${width}%` : 'unset'
   el.setAttribute('style', el.getAttribute('style') + (fontStyle ?? ''))
 
@@ -211,7 +187,6 @@ const renderTwoLineMessage = ({
   el.style.padding = `${height * 0.1}px ${height * 0.2}px`
   el.style.alignItems = 'start'
   el.style.backgroundColor = backgroundColor ?? 'transparent'
-  el.style.borderRadius = `${height * 0.1}px`
   el.style.maxWidth = width > 0 ? `${width}%` : 'unset'
   el.setAttribute('style', el.getAttribute('style') + (fontStyle ?? ''))
 
@@ -276,7 +251,6 @@ const renderSticker = ({
   el.style.padding = `${height * 0.1}px ${height * 0.2}px`
   el.style.alignItems = 'start'
   el.style.backgroundColor = backgroundColor ?? 'transparent'
-  el.style.borderRadius = `${height * 0.1}px`
   el.setAttribute('style', el.getAttribute('style') + (fontStyle ?? ''))
 
   if (avatarUrl) {
@@ -317,7 +291,6 @@ type Params = {
   backgroundColor?: string
   height: number
   width: number
-  outlineRatio: number
   emojiStyle: EmojiStyle
 }
 
@@ -327,13 +300,7 @@ export const render = (
 ): HTMLElement | null => {
   const newParams = {
     ...params,
-    fontStyle:
-      params.fontStyle +
-      getOutlineStyle(
-        params.fontColor ?? 'white',
-        params.height,
-        params.outlineRatio
-      ),
+    fontStyle: params.fontStyle,
   }
   switch (template) {
     case 'one-line-message':
