@@ -15,8 +15,6 @@
 - Add helper menu buttons on the chat list.
 
 ## Screenshots
-
-![screenshot](.github/img/screenshot1.gif)
 ![screenshot](.github/img/screenshot2.png)
 
 ## Installation
